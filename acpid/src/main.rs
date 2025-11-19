@@ -18,8 +18,8 @@ fn daemon(daemon: redox_daemon::Daemon) -> ! {
         "misc",
         "acpi",
         "acpid",
-        common::output_level(),
-        common::file_level(),
+        LevelFilter::Trace,
+        LevelFilter::Trace,
     );
 
     let rxsdt_raw_data: Arc<[u8]> = std::fs::read("/scheme/kernel.acpi/rxsdt")
