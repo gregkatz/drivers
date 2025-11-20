@@ -37,7 +37,7 @@ fn daemon(daemon: redox_daemon::Daemon) -> ! {
     let mut thirty_two_bit;
     let mut sixty_four_bit;
 
-    info!("SDT SIGNATURE: {}", str::from_utf8(&sdt.signature).unwrap());
+    info!("SDT SIGNATURE: {:x?}", &sdt.signature);
 
     let physaddrs_iter = match &sdt.signature {
         b"RSDT" => {
