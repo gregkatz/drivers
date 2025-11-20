@@ -37,8 +37,6 @@ fn daemon(daemon: redox_daemon::Daemon) -> ! {
     let mut thirty_two_bit;
     let mut sixty_four_bit;
 
-    info!("SDT SIGNATURE: {:x?}", &sdt.signature);
-
     let physaddrs_iter = match &sdt.signature {
         b"RSDT" => {
             thirty_two_bit = sdt
@@ -64,6 +62,8 @@ fn daemon(daemon: redox_daemon::Daemon) -> ! {
     };
 
     let address = physaddrs_iter.collect::<Vec<_>>();
+    info!("SDT SIGNATURE: {:x?}", &sdt.signature);
+
     for addr in address {
         info!("SDT addresss GMK GMK GMK: {:p}", addr as *const u64);
     }
