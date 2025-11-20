@@ -1,11 +1,11 @@
+use event::{EventFlags, RawEventQueue};
+use log::{info, LevelFilter};
+use redox_scheme::{RequestKind, SignalBehavior, Socket};
 use std::convert::TryFrom;
 use std::fs::File;
 use std::mem;
 use std::os::unix::io::AsRawFd;
 use std::sync::Arc;
-
-use event::{EventFlags, RawEventQueue};
-use redox_scheme::{RequestKind, SignalBehavior, Socket};
 use syscall::{EAGAIN, EWOULDBLOCK};
 
 mod acpi;
@@ -61,6 +61,8 @@ fn daemon(daemon: redox_daemon::Daemon) -> ! {
         _ => panic!("acpid: expected [RX]SDT from kernel to be either of those"),
     };
 
+    let address = physaddrs_iter.collect::<Vec<_>>();
+    info!("SDT addresss GMK GMK GMK: {:?}", address);
     let acpi_context = self::acpi::AcpiContext::init(physaddrs_iter);
 
     // TODO: I/O permission bitmap?

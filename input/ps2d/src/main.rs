@@ -1,5 +1,4 @@
 #[macro_use]
-
 extern crate bitflags;
 extern crate orbclient;
 extern crate syscall;
@@ -13,7 +12,7 @@ use std::{env, process};
 use common::acquire_port_io_rights;
 use event::{user_data, EventQueue};
 use inputd::ProducerHandle;
-use log::{LevelFilter, info};
+use log::{info, LevelFilter};
 use redox_scheme::{RequestKind, SignalBehavior, Socket};
 use syscall::{EAGAIN, EWOULDBLOCK};
 
