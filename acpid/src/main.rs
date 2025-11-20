@@ -18,8 +18,8 @@ fn daemon(daemon: redox_daemon::Daemon) -> ! {
         "misc",
         "acpi",
         "acpid",
-        LevelFilter::Trace,
-        LevelFilter::Trace,
+        LevelFilter::Info,
+        LevelFilter::Info,
     );
 
     let rxsdt_raw_data: Arc<[u8]> = std::fs::read("/scheme/kernel.acpi/rxsdt")
@@ -62,7 +62,7 @@ fn daemon(daemon: redox_daemon::Daemon) -> ! {
     };
 
     let address = physaddrs_iter.collect::<Vec<_>>();
-    info!("SDT SIGNATURE: {:x?}", &sdt.signature);
+    info!("GMK GMK SDT SIGNATURE: {:x?}", &sdt.signature);
 
     for addr in address {
         info!("SDT addresss GMK GMK GMK: {:p}", addr as *const u64);

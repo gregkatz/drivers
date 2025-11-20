@@ -1,3 +1,4 @@
+use crate::info;
 use acpi::aml::object::{Object, WrappedObject};
 use rustc_hash::FxHashMap;
 use std::convert::{TryFrom, TryInto};
@@ -155,6 +156,10 @@ impl Sdt {
         Ok(Self(slice))
     }
     pub fn load_from_physical(physaddr: usize) -> Result<Self, TablePhysLoadError> {
+        info!(
+            "Load from physical GMK GMK GMK: {:p}",
+            physaddr as *const usize
+        );
         let physaddr_start_page = physaddr / PAGE_SIZE * PAGE_SIZE;
         let physaddr_page_offset = physaddr % PAGE_SIZE;
 
