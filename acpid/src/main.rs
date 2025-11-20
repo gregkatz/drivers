@@ -37,6 +37,8 @@ fn daemon(daemon: redox_daemon::Daemon) -> ! {
     let mut thirty_two_bit;
     let mut sixty_four_bit;
 
+    info!("SDT SIGNATURE: {}", str::from_utf8(&sdt.signature).unwrap());
+
     let physaddrs_iter = match &sdt.signature {
         b"RSDT" => {
             thirty_two_bit = sdt
@@ -62,7 +64,9 @@ fn daemon(daemon: redox_daemon::Daemon) -> ! {
     };
 
     let address = physaddrs_iter.collect::<Vec<_>>();
-    info!("SDT addresss GMK GMK GMK: {:?}", address);
+    for addr in address {
+        info!("SDT addresss GMK GMK GMK: {:p}", addr as *const u64);
+    }
     let acpi_context = self::acpi::AcpiContext::init(physaddrs_iter);
 
     // TODO: I/O permission bitmap?
